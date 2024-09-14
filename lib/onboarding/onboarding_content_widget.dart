@@ -1,10 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:marketplace/auth/presentation/pages/login_screen.dart';
 
 import 'package:marketplace/shared/extensions/context_extensions.dart';
 import 'package:marketplace/shared/theme/app_colors.dart';
 import 'package:marketplace/shared/widgets/gap.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingContentWidget extends StatelessWidget {
   final String image;
@@ -40,7 +41,20 @@ class OnboardingContentWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  /// ?????!!!!
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+
+                  prefs.setBool('is_first_time_launch', false);
+
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const LoginScreen(),
+                    ),
+                    (router) => false,
+                  );
+                },
                 child: Text(
                   'Sign In',
                   style: context.textTheme.bodyLarge?.copyWith(

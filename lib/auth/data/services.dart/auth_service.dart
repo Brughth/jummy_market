@@ -12,7 +12,18 @@ class AuthService {
     required String username,
     required String password,
   }) async {
-    Response response = await http.post('/user/login');
+    Response response = await http.post(
+      '/auth/login',
+      data: {
+        "username": username,
+        "password": password,
+      },
+    );
+    return response.data;
+  }
+
+  Future<dynamic> getCurrentUser() async {
+    Response response = await http.get('/auth/me');
     return response.data;
   }
 }
