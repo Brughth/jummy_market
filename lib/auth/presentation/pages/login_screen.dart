@@ -88,14 +88,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     bgColor: AppColors.primary,
                     text: "Login",
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        context.read<AuthBloc>().add(
-                              LoginEvent(
-                                username: userNameController.text,
-                                password: passwordController.text,
-                              ),
-                            );
-                      }
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                          builder: (context) => const ApplicationScreen(),
+                        ),
+                        (router) => false,
+                      );
+                      // if (_formKey.currentState!.validate()) {
+                      //   context.read<AuthBloc>().add(
+                      //         LoginEvent(
+                      //           username: userNameController.text,
+                      //           password: passwordController.text,
+                      //         ),
+                      //       );
+                      // }
                     },
                   )
                 ],
