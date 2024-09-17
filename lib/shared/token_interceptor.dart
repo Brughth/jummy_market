@@ -11,6 +11,5 @@ class TokenInterceptor extends QueuedInterceptor {
       options.headers['Authorization'] = 'Bearer $token';
     }
     handler.next(options);
-    super.onRequest(options, handler);
   }
 }

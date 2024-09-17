@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace/auth/business_logic/bloc/auth_bloc.dart';
+import 'package:marketplace/home_screen.dart';
 import 'package:marketplace/shared/theme/app_colors.dart';
 
 class ApplicationScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
       body: PageView(
         controller: pageController,
         children: [
-          const HomeApplication(),
+          const HomeScreen(),
           Container(
             height: MediaQuery.sizeOf(context).height,
             width: MediaQuery.sizeOf(context).width,
@@ -78,65 +79,4 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
       ),
     );
   }
-}
-
-class HomeApplication extends StatefulWidget {
-  const HomeApplication({
-    super.key,
-  });
-
-  @override
-  State<HomeApplication> createState() => _HomeApplicationState();
-}
-
-class _HomeApplicationState extends State<HomeApplication> {
-  List<CategoryModel> categorys = [
-    CategoryModel(id: 1, name: "Fruit"),
-    CategoryModel(id: 2, name: "Banane"),
-    CategoryModel(id: 3, name: "Chaussure"),
-    CategoryModel(id: 4, name: "Location vehicule"),
-    CategoryModel(id: 5, name: "Location Chaussure"),
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-              height: 50,
-              width: MediaQuery.sizeOf(context).width,
-              padding: const EdgeInsets.all(5),
-              child: ListView.builder(
-                itemCount: categorys.length,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (BuildContext context, int index) {
-                  CategoryModel categoryItem = categorys[index];
-                  return Container(
-                    padding: const EdgeInsets.all(8),
-                    margin: const EdgeInsets.only(right: 10),
-                    decoration: const BoxDecoration(
-                      color: AppColors.primary,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(18),
-                      ),
-                    ),
-                    child: Text(categoryItem.name),
-                  );
-                },
-              )),
-        ],
-      ),
-    );
-  }
-}
-
-class CategoryModel {
-  final String name;
-  final int id;
-
-  CategoryModel({required this.id, required this.name});
 }
