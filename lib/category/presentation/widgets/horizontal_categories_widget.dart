@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketplace/category/business_logic/bloc/category_list_bloc.dart';
+import 'package:marketplace/products/business_logic/bloc/products_bloc.dart';
+import 'package:marketplace/products/data/models/product_query_filter.dart';
+import 'package:marketplace/products/data/repositories/product_repository.dart';
+import 'package:marketplace/products/presentation/pages/product_list_screen.dart';
+import 'package:marketplace/service_locator.dart';
 import 'package:marketplace/shared/extensions/context_extensions.dart';
 import 'package:marketplace/shared/extensions/string_extension.dart';
 import 'package:marketplace/shared/shimmer_container.dart';
@@ -51,24 +56,41 @@ class HorizontalCategoriesWidget extends StatelessWidget {
               itemCount: (state.categories ?? []).length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                  ),
-                  margin: const EdgeInsets.only(right: 10),
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(.5),
-                    borderRadius: const BorderRadius.all(
-                      Radius.circular(18),
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) {
+                        return ProductListScreen(
+                          bloc: ProductsBloc(
+                            repository: getIt.get<ProductRepository>(),
+                            filter: ProductQueryFilter(
+                              category: state.categories![index],
+                            ),
+                          )..add(GetProductsEvent()),
+                          title: state.categories![index].capitalize(),
+                        );
+                      }),
+                    );
+                  },
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
                     ),
-                  ),
-                  child: Center(
-                      child: Text(
-                    state.categories![index].capitalize(),
-                    style: context.textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withOpacity(.5),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(18),
+                      ),
                     ),
-                  )),
+                    child: Center(
+                        child: Text(
+                      state.categories![index].capitalize(),
+                      style: context.textTheme.bodyLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )),
+                  ),
                 );
               },
             ),
