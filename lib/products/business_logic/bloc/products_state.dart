@@ -2,21 +2,21 @@ part of 'products_bloc.dart';
 
 @immutable
 class ProductsState {
-  const ProductsState();
+  final List<ProductModel>? products;
+  const ProductsState({
+    this.products,
+  });
 }
 
 final class ProductsInitial extends ProductsState {}
 
-final class ProductsLoading extends ProductsState {}
+final class FetchProductsLoading extends ProductsState {}
 
-final class ProductsSuccess extends ProductsState {
-  final List<ProductsModel> products;
-
-  const ProductsSuccess({required this.products});
+final class FetchProductsSuccess extends ProductsState {
+  const FetchProductsSuccess({required super.products});
 }
 
-final class ProductsFailure extends ProductsState {
+final class FetchProductsFailure extends ProductsState {
   final String message;
-  const ProductsFailure({required this.message});
+  const FetchProductsFailure({required this.message});
 }
-

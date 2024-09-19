@@ -7,6 +7,7 @@ import 'package:marketplace/category/business_logic/bloc/category_list_bloc.dart
 import 'package:marketplace/category/data/category_repository.dart';
 import 'package:marketplace/category/data/category_service.dart';
 import 'package:marketplace/products/business_logic/bloc/products_bloc.dart';
+import 'package:marketplace/products/data/models/product_query_filter.dart';
 import 'package:marketplace/products/data/repositories/product_repository.dart';
 import 'package:marketplace/products/data/service/product_service.dart';
 import 'package:marketplace/shared/token_interceptor.dart';
@@ -29,7 +30,16 @@ void setupLocator() {
       CategoryRepository(service: getIt.get<CategoryService>()));
   getIt.registerSingleton(
       CategoryListBloc(repository: getIt.get<CategoryRepository>()));
-  
-  
-  
+
+  getIt.registerSingleton(ProductService(http: getIt.get<Dio>()));
+  getIt.registerSingleton(
+      ProductRepository(service: getIt.get<ProductService>()));
+  getIt.registerSingleton(
+    ProductsBloc(
+      repository: getIt.get<ProductRepository>(),
+      filter: ProductQueryFilter(
+        limit: 30,
+      ),
+    ),
+  );
 }

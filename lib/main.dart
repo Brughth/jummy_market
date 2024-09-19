@@ -4,9 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketplace/app_init_screen.dart';
-import 'package:marketplace/application_screen.dart';
 import 'package:marketplace/auth/business_logic/bloc/auth_bloc.dart';
 import 'package:marketplace/category/business_logic/bloc/category_list_bloc.dart';
+import 'package:marketplace/products/business_logic/bloc/products_bloc.dart';
 import 'package:marketplace/service_locator.dart';
 import 'package:marketplace/shared/theme/light_theme.dart';
 
@@ -41,13 +41,16 @@ class MyApp extends StatelessWidget {
           BlocProvider(
             create: (context) => getIt.get<CategoryListBloc>(),
           ),
+          BlocProvider(
+            create: (context) => getIt.get<ProductsBloc>(),
+          ),
         ],
         child: MaterialApp(
           title: 'Marketplace',
           themeMode: ThemeMode.light,
           theme: buildLightTheme(),
           darkTheme: buildLightTheme(),
-          home: const ApplicationScreen(),
+          home: const AppInitScreen(),
         ),
       ),
     );

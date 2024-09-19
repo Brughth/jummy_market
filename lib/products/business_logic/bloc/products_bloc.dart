@@ -3,21 +3,31 @@ import 'package:marketplace/products/data/models/products_model.dart';
 import 'package:marketplace/products/data/repositories/product_repository.dart';
 import 'package:meta/meta.dart';
 
+import '../../data/models/product_query_filter.dart';
+
 part 'products_event.dart';
 part 'products_state.dart';
 
-
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final ProductRepository repository;
+  final ProductQueryFilter filter;
 
-  ProductsBloc(this.repository) : super(ProductsInitial()) {
+  //'emilys'
+  //'emilyspass'
+
+  ProductsBloc({
+    required this.repository,
+    required this.filter,
+  }) : super(ProductsInitial()) {
     on<GetProductsEvent>((event, emit) async {
       try {
-        emit(ProductsLoading());
-        final products = await repository.getProducts();
-        emit(ProductsSuccess(products: products)); 
+        emit(FetchProductsLoading());
+        final products = await repository.getProducts(
+          filter: filter,
+        );
+        emit(FetchProductsSuccess(products: products));
       } catch (err) {
-        emit(ProductsFailure(message: err.toString()));
+        emit(FetchProductsFailure(message: err.toString()));
       }
     });
   }

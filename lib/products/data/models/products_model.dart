@@ -1,4 +1,4 @@
-class ProductsModel {
+class ProductModel {
   final int id;
   final String title;
   final String description;
@@ -8,7 +8,7 @@ class ProductsModel {
   final double rating;
   final int stock;
   final List<String> tags;
-  final String brand;
+  final String? brand;
   final String sku;
   final double weight;
   final Dimensions dimensions; //objets imbriqués
@@ -22,7 +22,7 @@ class ProductsModel {
   final List<String> images;
   final String thumbnail;
 
-  ProductsModel({
+  ProductModel({
     required this.id,
     required this.title,
     required this.description,
@@ -32,7 +32,7 @@ class ProductsModel {
     required this.rating,
     required this.stock,
     required this.tags,
-    required this.brand,
+    this.brand,
     required this.sku,
     required this.weight,
     required this.dimensions,
@@ -47,8 +47,8 @@ class ProductsModel {
     required this.thumbnail,
   });
 
-  factory ProductsModel.fromJson(Map<String, dynamic> json) {
-    return ProductsModel(
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
       id: json['id'],
       title: json['title'],
       description: json['description'],
@@ -95,8 +95,6 @@ class Dimensions {
       depth: json['depth'].toDouble(),
     );
   }
-
- 
 }
 
 class Review {
@@ -123,8 +121,6 @@ class Review {
       reviewerEmail: json['reviewerEmail'],
     );
   }
-
-  
 }
 
 class Meta {
@@ -148,5 +144,4 @@ class Meta {
       qrCode: json['qrCode'],
     );
   }
-
 }
