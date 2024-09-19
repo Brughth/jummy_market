@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketplace/app_init_screen.dart';
+import 'package:marketplace/application_screen.dart';
 import 'package:marketplace/auth/business_logic/bloc/auth_bloc.dart';
 import 'package:marketplace/auth/data/repositories/auth_repository.dart';
 import 'package:marketplace/auth/data/services.dart/auth_service.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           themeMode: ThemeMode.light,
           theme: buildLightTheme(),
           darkTheme: buildLightTheme(),
-          home: const AppInitScreen(),
+          home: const ApplicationScreen(),
         ),
       ),
     );
