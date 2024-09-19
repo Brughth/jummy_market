@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:marketplace/application_screen.dart';
 import 'package:marketplace/auth/business_logic/bloc/auth_bloc.dart';
+import 'package:marketplace/category/business_logic/bloc/category_list_bloc.dart';
 import 'package:marketplace/shared/theme/app_colors.dart';
 import 'package:marketplace/shared/widgets/app_button.dart';
 import 'package:marketplace/shared/widgets/app_input.dart';
@@ -46,6 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
           }
 
           if (state is LoginSuccess) {
+            context.read<CategoryListBloc>().add(
+                  FetchCategoryListEvent(),
+                );
             Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(
                 builder: (context) => const ApplicationScreen(),
@@ -88,6 +92,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     bgColor: AppColors.primary,
                     text: "Login",
                     onPressed: () {
+                      // Navigator.of(context).pushAndRemoveUntil(
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const ApplicationScreen(),
+                      //   ),
+                      //   (router) => false,
+                      // );
                       if (_formKey.currentState!.validate()) {
                         context.read<AuthBloc>().add(
                               LoginEvent(
