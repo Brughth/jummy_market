@@ -41,6 +41,7 @@ dependencies:
   shared_preferences: ^2.3.2
   flutter_bloc: ^8.1.6
   form_builder_validators: ^11.0.0
+  blur: ^4.0.0
 
 dev_dependencies:
   flutter_test:
