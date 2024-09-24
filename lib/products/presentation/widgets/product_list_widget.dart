@@ -2,8 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marketplace/cart/business_logic/cubit/cart_cubit.dart';
 import 'package:marketplace/products/business_logic/bloc/products_bloc.dart';
 import 'package:marketplace/products/data/models/products_model.dart';
+import 'package:marketplace/service_locator.dart';
 
 class ProductListWidget extends StatelessWidget {
   final ProductsBloc bloc;
@@ -113,36 +115,27 @@ class ProductCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "\$${product.price}",
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFFFF7643),
+                Flexible(
+                  child: Text(
+                    "\$${product.price}",
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFFFF7643),
+                    ),
                   ),
                 ),
                 InkWell(
                   borderRadius: BorderRadius.circular(50),
-                  onTap: () {},
+                  onTap: () {
+                    getIt.get<CartCubit>().addToCart(product);
+                  },
                   child: Container(
-                    padding: const EdgeInsets.all(6),
-                    height: 24,
-                    width: 24,
-                    decoration: BoxDecoration(
-                      color: product.rating > 3
-                          ? const Color(0xFFFF7643).withOpacity(0.15)
-                          : const Color(0xFF979797).withOpacity(0.1),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFFFF7643),
                       shape: BoxShape.circle,
                     ),
-                    // child: SvgPicture.string(
-                    //   heartIcon,
-                    //   colorFilter: ColorFilter.mode(
-                    //     product.isFavourite
-                    //         ? const Color(0xFFFF4848)
-                    //         : const Color(0xFFDBDEE4),
-                    //     BlendMode.srcIn,
-                    //   ),
-                    // ),
+                    child: const Icon(Icons.add),
                   ),
                 ),
               ],

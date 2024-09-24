@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:marketplace/auth/business_logic/bloc/auth_bloc.dart';
 import 'package:marketplace/auth/data/repositories/auth_repository.dart';
 import 'package:marketplace/auth/data/services.dart/auth_service.dart';
+import 'package:marketplace/cart/business_logic/cubit/cart_cubit.dart';
 import 'package:marketplace/category/business_logic/bloc/category_list_bloc.dart';
 import 'package:marketplace/category/data/category_repository.dart';
 import 'package:marketplace/category/data/category_service.dart';
@@ -42,4 +43,6 @@ void setupLocator() {
       ),
     ),
   );
+
+  getIt.registerSingleton<CartCubit>(CartCubit());
 }

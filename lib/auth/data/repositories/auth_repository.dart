@@ -20,7 +20,7 @@ class AuthRepository {
     );
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('token', data['token']);
+    await prefs.setString('token', data['accessToken']);
     await prefs.setString('refreshToken', data['refreshToken']);
 
     return UserModel.fromJson(data);

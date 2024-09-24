@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketplace/app_init_screen.dart';
 import 'package:marketplace/auth/business_logic/bloc/auth_bloc.dart';
+import 'package:marketplace/cart/business_logic/cubit/cart_cubit.dart';
 import 'package:marketplace/category/business_logic/bloc/category_list_bloc.dart';
 import 'package:marketplace/products/business_logic/bloc/products_bloc.dart';
 import 'package:marketplace/service_locator.dart';
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) => getIt.get<ProductsBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => getIt.get<CartCubit>(),
           ),
         ],
         child: MaterialApp(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:marketplace/auth/business_logic/bloc/auth_bloc.dart';
+import 'package:marketplace/cart/business_logic/cubit/cart_cubit.dart';
 import 'package:marketplace/home_screen.dart';
 import 'package:marketplace/shared/theme/app_colors.dart';
 
@@ -30,6 +30,18 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
         centerTitle: true,
         elevation: 2.0,
         title: const Text("Market"),
+        actions: [
+          BlocBuilder<CartCubit, CartState>(
+            builder: (context, state) {
+              return Container(
+                margin: EdgeInsets.only(right: 10),
+                decoration: const BoxDecoration(color: AppColors.primary),
+                padding: const EdgeInsets.all(4),
+                child: Text("${state.products.length}"),
+              );
+            },
+          )
+        ],
       ),
       body: PageView(
         controller: pageController,
