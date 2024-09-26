@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'cart_cubit.dart';
 
 class CartState {
@@ -8,7 +7,7 @@ class CartState {
     var total = 0.0;
 
     for (var product in products) {
-      var price = product.price * (product.quantity ?? 1);
+      var price = product.price * (product.quantity ?? 0);
 
       total = total + price;
     }
@@ -21,4 +20,20 @@ class CartState {
   CartState({
     required this.products,
   });
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'products': products.map((x) => x.toMap()).toList(),
+    };
+  }
+
+  factory CartState.fromJson(Map<String, dynamic> map) {
+    return CartState(
+      products: List<ProductModel>.from(
+        (map['products'] as List<int>).map<ProductModel>(
+          (x) => ProductModel.fromJson(x as Map<String, dynamic>),
+        ),
+      ),
+    );
+  }
 }

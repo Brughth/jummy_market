@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace/cart/business_logic/cubit/cart_cubit.dart';
+import 'package:marketplace/cart/presentation/cart_screen.dart';
 import 'package:marketplace/home_screen.dart';
 import 'package:marketplace/shared/theme/app_colors.dart';
+import 'package:badges/badges.dart' as badges;
 
 class ApplicationScreen extends StatefulWidget {
   const ApplicationScreen({super.key});
@@ -33,11 +35,26 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
         actions: [
           BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
-              return Container(
-                margin: EdgeInsets.only(right: 10),
-                decoration: const BoxDecoration(color: AppColors.primary),
-                padding: const EdgeInsets.all(4),
-                child: Text("${state.products.length}"),
+              return Padding(
+                padding: const EdgeInsets.only(right: 48.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const CartPage(),
+                      ),
+                    );
+                  },
+                  child: badges.Badge(
+                    badgeContent: Text(
+                      '${state.products.length}',
+                    ),
+                    child: const Icon(
+                      Icons.shopping_cart,
+                    ),
+                  ),
+                ),
               );
             },
           )

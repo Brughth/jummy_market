@@ -15,9 +15,10 @@ class AppButton extends StatelessWidget {
   final double height;
   final String? text;
   final Color? textColor;
+  final TextStyle? textStyle;
 
   const AppButton({
-    Key? key,
+    super.key,
     this.child,
     this.onPressed,
     this.enable = true,
@@ -29,7 +30,8 @@ class AppButton extends StatelessWidget {
     this.loadingColor,
     this.text,
     this.textColor,
-  }) : super(key: key);
+    this.textStyle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +64,14 @@ class AppButton extends StatelessWidget {
                   child: text != null
                       ? Text(
                           text!,
-                          style: context.textTheme.titleMedium?.copyWith(
-                            color: textColor ??
-                                (bgColor == AppColors.primary
-                                    ? AppColors.white
-                                    : AppColors.black),
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: textStyle ??
+                              context.textTheme.titleMedium?.copyWith(
+                                color: textColor ??
+                                    (bgColor == AppColors.primary
+                                        ? AppColors.white
+                                        : AppColors.black),
+                                fontWeight: FontWeight.w600,
+                              ),
                         )
                       : child,
                 ),

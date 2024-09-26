@@ -1,13 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:marketplace/category/presentation/widgets/horizontal_categories_widget.dart';
 import 'package:marketplace/products/business_logic/bloc/products_bloc.dart';
-import 'package:marketplace/products/data/models/products_model.dart';
 import 'package:marketplace/products/presentation/widgets/product_list_widget.dart';
-import 'package:marketplace/service_locator.dart';
 import 'package:marketplace/shared/extensions/context_extensions.dart';
 import 'package:marketplace/shared/widgets/gap.dart';
 

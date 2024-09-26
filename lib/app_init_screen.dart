@@ -43,12 +43,12 @@ class _AppInitScreenState extends State<AppInitScreen> {
           );
         }
 
-        if (state is CheckAuthStateFailure) {
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(builder: (context) => const LoginScreen()),
-            (router) => false,
-          );
-        }
+        // if (state is CheckAuthStateFailure) {
+        //   Navigator.of(context).pushAndRemoveUntil(
+        //     MaterialPageRoute(builder: (context) => const LoginScreen()),
+        //     (router) => false,
+        //   );
+        // }
       },
       child: const Scaffold(
         body: Center(
