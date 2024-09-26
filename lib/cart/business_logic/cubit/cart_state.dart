@@ -8,7 +8,7 @@ class CartState {
     var total = 0.0;
 
     for (var product in products) {
-      var price = product.price * (product.quantity ?? 1);
+      var price = product.price * (product.quantity ?? 0);
 
       total = total + price;
     }

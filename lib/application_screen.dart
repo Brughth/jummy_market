@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace/cart/business_logic/cubit/cart_cubit.dart';
+import 'package:marketplace/cart/presentation/cart_screen.dart';
 import 'package:marketplace/home_screen.dart';
 import 'package:marketplace/shared/theme/app_colors.dart';
 
@@ -33,11 +34,45 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
         actions: [
           BlocBuilder<CartCubit, CartState>(
             builder: (context, state) {
-              return Container(
-                margin: EdgeInsets.only(right: 10),
-                decoration: const BoxDecoration(color: AppColors.primary),
-                padding: const EdgeInsets.all(4),
-                child: Text("${state.products.length}"),
+              return Padding(
+                padding: const EdgeInsets.only(right: 48.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CartPage(),
+                      ),
+                    );
+                  },
+                  child: Stack(children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          color: AppColors.white, shape: BoxShape.circle),
+                      padding: const EdgeInsets.all(8),
+                      child: const Icon(
+                        Icons.shopping_cart_rounded,
+                        color: AppColors.primary,
+                      ),
+                    ),
+                    if (state.products.isNotEmpty)
+                      Positioned(
+                        top: 0,
+                        right: 0,
+                        child: Container(
+                          padding: const EdgeInsets.all(3),
+                          decoration: const BoxDecoration(
+                            color: AppColors.red300,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Text(
+                            "${state.products.length}",
+                            style: const TextStyle(color: AppColors.white),
+                          ),
+                        ),
+                      )
+                  ]),
+                ),
               );
             },
           )

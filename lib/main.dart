@@ -50,6 +50,7 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Marketplace',
           themeMode: ThemeMode.light,
           theme: buildLightTheme(),
