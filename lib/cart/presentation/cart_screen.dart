@@ -6,6 +6,8 @@ import 'package:marketplace/products/data/models/products_model.dart';
 import 'package:marketplace/shared/theme/app_colors.dart';
 
 class CartPage extends StatelessWidget {
+  const CartPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +26,7 @@ class CartPage extends StatelessWidget {
             itemCount: state.products.length,
             itemBuilder: (context, index) {
               final product = state.products[index];
-              return CartItemList(product: product);
+              return CartItem(product: product);
             },
           );
         },
@@ -33,8 +35,8 @@ class CartPage extends StatelessWidget {
   }
 }
 
-class CartItemList extends StatelessWidget {
-  const CartItemList({
+class CartItem extends StatelessWidget {
+  const CartItem({
     super.key,
     required this.product,
   });
@@ -54,7 +56,9 @@ class CartItemList extends StatelessWidget {
                 imageUrl: product.images.first,
                 placeholder: (context, url) {
                   return CachedNetworkImage(
-                    imageUrl: product.thumbnail,
+                    imageUrl: product.images.isNotEmpty
+                        ? product.images.first
+                        : product.thumbnail,
                   );
                 },
               )
@@ -62,7 +66,7 @@ class CartItemList extends StatelessWidget {
         title: Text(product.title),
         subtitle: Text(product.category),
         trailing: Container(
-          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 1),
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 1),
           decoration: BoxDecoration(
               border: Border.all(color: Colors.black),
               borderRadius: BorderRadius.circular(20)),
@@ -70,14 +74,14 @@ class CartItemList extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               IconButton(
-                icon: Icon(Icons.remove, size: 12),
+                icon: const Icon(Icons.remove, size: 12),
                 onPressed: () {
                   context.read<CartCubit>().decrementQuantity(product);
                 },
               ),
               Text('${product.quantity}'),
               IconButton(
-                icon: Icon(Icons.add, size: 12),
+                icon: const Icon(Icons.add, size: 12),
                 onPressed: () {
                   context.read<CartCubit>().incrementQuantity(product);
                 },

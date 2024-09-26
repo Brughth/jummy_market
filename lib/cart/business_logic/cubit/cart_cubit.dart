@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:marketplace/products/data/models/products_model.dart';
-import 'package:meta/meta.dart';
 
 part 'cart_state.dart';
 
