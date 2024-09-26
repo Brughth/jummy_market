@@ -51,7 +51,7 @@ class CounterWidget extends StatelessWidget {
       child: Column(
         // emilys,  'emilyspass'
         children: [
-          Spacer(),
+          const Spacer(),
           BlocBuilder<CounterBloc, CounterState>(
             bloc: bloc,
             builder: (context, state) {
@@ -61,7 +61,7 @@ class CounterWidget extends StatelessWidget {
               );
             },
           ),
-          Spacer(),
+          const Spacer(),
           Row(
             children: [
               Expanded(
@@ -73,7 +73,7 @@ class CounterWidget extends StatelessWidget {
                   },
                 ),
               ),
-              GapW(20),
+              const GapW(20),
               Expanded(
                 child: AppButton(
                   bgColor: AppColors.red400,
@@ -85,7 +85,7 @@ class CounterWidget extends StatelessWidget {
               ),
             ],
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );

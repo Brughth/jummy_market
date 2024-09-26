@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class ProductModel {
   final int id;
   final String title;
@@ -134,6 +133,34 @@ class ProductModel {
       quantity: quantity ?? this.quantity,
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'title': title,
+      'description': description,
+      'category': category,
+      'price': price,
+      'discountPercentage': discountPercentage,
+      'rating': rating,
+      'stock': stock,
+      'tags': tags,
+      'brand': brand,
+      'sku': sku,
+      'weight': weight,
+      'dimensions': dimensions.toJson(),
+      'warrantyInformation': warrantyInformation,
+      'shippingInformation': shippingInformation,
+      'availabilityStatus': availabilityStatus,
+      'reviews': reviews.map((x) => x.toJson()).toList(),
+      'returnPolicy': returnPolicy,
+      'minimumOrderQuantity': minimumOrderQuantity,
+      'meta': meta.toJson(),
+      'images': images,
+      'thumbnail': thumbnail,
+      'quantity': quantity,
+    };
+  }
 }
 
 class Dimensions {
@@ -153,6 +180,14 @@ class Dimensions {
       height: json['height'].toDouble(),
       depth: json['depth'].toDouble(),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'width': width,
+      'height': height,
+      'depth': depth,
+    };
   }
 }
 
@@ -180,6 +215,16 @@ class Review {
       reviewerEmail: json['reviewerEmail'],
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'rating': rating,
+      'comment': comment,
+      'date': date.millisecondsSinceEpoch,
+      'reviewerName': reviewerName,
+      'reviewerEmail': reviewerEmail,
+    };
+  }
 }
 
 class Meta {
@@ -202,5 +247,14 @@ class Meta {
       barcode: json['barcode'],
       qrCode: json['qrCode'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+      'barcode': barcode,
+      'qrCode': qrCode,
+    };
   }
 }

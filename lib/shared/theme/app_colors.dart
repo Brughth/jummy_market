@@ -23,6 +23,7 @@ abstract class AppColors {
   static const Color gray400 = Color(0xFFA0A0A0);
 
   static const Color red400 = Color(0xffB91C1C);
+   static const Color red300 = Color.fromARGB(255, 211, 7, 7);
   static const Color green = Colors.green;
 
   static const Color gray300 = Color(0xffD1D5DB);
@@ -31,12 +32,10 @@ abstract class AppColors {
     primary: AppColors.primary,
     secondary: AppColors.darkblue,
     surface: surfaceWhite,
-    background: white,
     error: red400,
     onPrimary: black,
     onSecondary: black,
     onSurface: black,
-    onBackground: black,
     onError: white,
     brightness: Brightness.light,
   );
